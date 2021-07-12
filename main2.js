@@ -2,11 +2,18 @@ const input = document.querySelector(".inputForItems");
 const inputForm = document.querySelector(".items");
 const ul = document.querySelector(".ulItem");
 const plusBtn = document.querySelector(".plus");
+let id = 0;
 
-function handleDeleteClick(event) {
-  const parentLi = event.target.parentElement;
-  parentLi.remove();
-}
+ul.addEventListener("click", (event) => {
+  const btn = event.target;
+  if (
+    btn.nodeName === "BUTTON" &&
+    btn.dataset.id === btn.parentElement.dataset.id
+  ) {
+    btn.parentElement.remove();
+    // console.log(btn.parentElement.dataset.id);
+  }
+});
 
 function handleSubmit(event) {
   event.preventDefault();
@@ -22,18 +29,11 @@ function handleSubmit(event) {
 function displayItem(enteredItem) {
   const li = document.createElement("li");
   li.classList.add("liItem");
-  const span = document.createElement("span");
-  span.innerText = enteredItem;
-
-  const deleteBtn = document.createElement("button");
-  deleteBtn.innerHTML = "✖";
-  deleteBtn.classList.add("deleteBtn");
-  deleteBtn.addEventListener("click", (event) => {
-    handleDeleteClick(event);
-  });
-
-  li.appendChild(span);
-  li.appendChild(deleteBtn);
+  li.setAttribute("data-id", id);
+  li.innerHTML = `
+    <span class="name">${enteredItem}</span>
+    <button class="deltebtn" data-id="${id}">✖</button>`;
+  id++;
   ul.appendChild(li);
 }
 
