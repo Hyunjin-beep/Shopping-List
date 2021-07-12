@@ -103,9 +103,10 @@ span {
   font-size: var(--normal-size);
 }
 
-.deleteBtn {
+.deltebtn {
   float: right;
   border: none;
+  outline: none;
   background: transparent;
 }
 
